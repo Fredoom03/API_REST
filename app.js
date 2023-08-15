@@ -1,4 +1,3 @@
-const { findAvailablePort } = require('./free-port')
 const movies = require('./mocks/movies.json')
 const crypto = require('node:crypto')
 const cors = require('cors')
@@ -27,13 +26,6 @@ app.disable('x-powered-by')
 app.use(express.json())
 
 app.get('/movies', (req, res) => {
-  // req.map(data => console.log(data))
-  // const origin = req.header('origin')
-
-  // if (ACCEPTED_ORIGINS.includes(origin) || !origin) {
-  //   res.header('Access-Control-Allow-Origin', origin)
-  // }
-
   const { genre } = req.query
 
   if (genre) {
@@ -73,12 +65,6 @@ app.post('/movies', (req, res) => {
 })
 
 app.delete('/movies/:id', (req, res) => {
-  // const origin = req.header('origin')
-
-  // if (ACCEPTED_ORIGINS.includes(origin) || !origin) {
-  //   res.header('Access-Control-Allow-Origin', origin)
-  // }
-
   const { id } = req.params
   const movieIndex = movies.findIndex(movie => movie.id === id)
 
@@ -111,20 +97,8 @@ app.patch('/movies/:id', (req, res) => {
   return res.json(updateMovie)
 })
 
-// app.options('/movies/:id', (req, res) => {
-//   const origin = req.header('origin')
-
-//   if (ACCEPTED_ORIGINS.includes(origin) || !origin) {
-//     res.header('Access-Control-Allow-Origin', origin)
-//     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE')
-//   }
-//   res.send()
-// })
-
 const PORT = process.env.PORT ?? 8000
 
-findAvailablePort(PORT).then((port) => {
-  app.listen(port, () => {
-    console.log(`Server listening on http://localhost:${PORT}`)
-  })
+app.listen(PORT, () => {
+  console.log(`Server listening on http://localhost:${PORT}`)
 })
