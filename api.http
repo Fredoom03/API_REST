@@ -1,0 +1,46 @@
+### Recuperar todas las peliculas
+GET http://localhost:8000/movies
+
+### Recuperar pelicula por id
+GET http://localhost:8000/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
+
+### Recuperar pelicula POST por id
+GET http://localhost:8000/movies/7297c955-5a0e-4666-ba49-de6f94f8f284
+
+### Recuperar peliculas por genero
+GET http://localhost:8000/movies?genre=Action
+
+### Crear un una película con POST
+POST http://localhost:8000/movies
+Content-Type: application/json
+
+{    
+  "sql": "SELECT * FROM users",
+  "title": "PRUEBA 3",
+  "year": 2008,
+  "director": "Christopher PRUEBA 3",
+  "duration": 152,
+  "poster": "https://i.ebayimg.com/images/g/yokAAOSw8w1YARbm/s-l1200.jpg",
+  "genre": ["Action"]
+}
+
+### Crear un una película con POST (VALIDACION CON ZOD)
+POST http://localhost:8000/movies
+Content-Type: application/json
+
+{    
+  "title": 1,
+  "year": "pepote"
+}
+
+
+### Acutalizar una película
+PATCH http://localhost:8000/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
+Content-Type: application/json
+
+{
+  "year": "1992"
+}
+
+### Borrar por id
+DELETE http://localhost:8000/movies/5ad1a235-0d9c-410a-b32b-220d91689a08
